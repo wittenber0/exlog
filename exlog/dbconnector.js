@@ -6,25 +6,30 @@ const connection = mysql.createConnection({
   password: 'Ng92KAB4?4~5',
   database: 'mygeneric'
 });
-connection.connect((err) => {
-  if (err) throw err;
-  console.log('Connected!');
-});
+module.exports.connect = () =>{
+  connection.connect((err) => {
+    if (err) throw err;
+    console.log('Connected!');
+  });
+}
 
-getLiftWorkoutsById(1);
+module.exports.disconnect = () =>{
+  connection.end(function(err) {
+    if (err) {
+      return console.log('error:' + err.message);
+    }
+    console.log('Closed the database connection.');
+  });
+}
 
-connection.end(function(err) {
-  if (err) {
-    return console.log('error:' + err.message);
-  }
-  console.log('Closed the database connection.');
-});
-
-function getLiftWorkoutsById(workoutId){
+module.exports.getLiftWorkoutsById = (workoutId) =>{
+  return new Promise((res, rej) => {
     connection.query(queries.GET_LIFT_WORKOUTS_BY_ID+workoutId, (err, rows)=>{
-        if(err) throw err;
+        if(err) return rej(err);
     
-        console.log(JSON.parse(JSON.stringify(rows)));
+        res(JSON.parse(JSON.stringify(rows)));
     })
+  })
+    
 }
 
