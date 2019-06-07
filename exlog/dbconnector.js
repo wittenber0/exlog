@@ -23,13 +23,21 @@ module.exports.disconnect = () =>{
 }
 
 module.exports.getLiftWorkoutsById = (workoutId) =>{
+  let quer =  queries.GET_LIFT_WORKOUTS_BY_ID;
+  if(workoutId){
+    quer += ' where lift_workouts.lift_workout_id = '+workoutId;
+  }
   return new Promise((res, rej) => {
-    connection.query(queries.GET_LIFT_WORKOUTS_BY_ID+workoutId, (err, rows)=>{
+    connection.query(quer, (err, rows)=>{
         if(err) return rej(err);
     
         res(JSON.parse(JSON.stringify(rows)));
     })
   })
     
+}
+
+module.exports.getAllLiftWorkouts = () =>{
+  return module.exports.getLiftWorkoutsById();
 }
 

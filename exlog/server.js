@@ -9,5 +9,5 @@ app.listen(port, ()=>console.log("listening on port " + port));
 
 app.get('/api', (req, res) =>{
 
-    db.getLiftWorkoutsById(1).then((data)=>res.send(data));
+    db.getAllLiftWorkouts().then((data)=>res.send(data));
 })

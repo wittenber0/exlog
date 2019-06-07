@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import TableComponent from './TableComponent';
+
 class App extends Component {
 state = {
     data: null
@@ -35,7 +37,7 @@ state = {
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
             <h1 className="App-title">Welcome to React</h1>
-            <p className="App-intro">{this.state.data[0].workout_date}</p>
+            <TableComponent data={this.state.data} columnNames={Object.keys(this.state.data[0])}></TableComponent>
           </header>
           
         </div>
