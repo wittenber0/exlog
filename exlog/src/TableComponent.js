@@ -7,24 +7,26 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 
+import './Styles/TableComponent.css'
+
 const TR = {
     background: 'blue'
 };
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {
-    width: '80%',
-    marginTop: theme.spacing(3),
+    width: '100%',
     overflowX: 'auto',
   },
   table: {
-    width: '80%',
-    minWidth: 650,
+    minWidth: 1000,
   },
-  tableRow: {
-    color: 'blue',
+  row: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
+    },
   },
-}));
+});
 
 class TableComponent extends Component{
 
@@ -32,11 +34,12 @@ class TableComponent extends Component{
 
 
     render(){
+      const { classes } = this.props;
         return(
-            <div className={useStyles.root}>
-                <Table className={useStyles.table}>
+            <div className={classes.root}>
+                <Table className={classes.table}>
                     <TableHead>
-                        <TableRow className={useStyles.tableRow}>
+                        <TableRow className={classes.tableRow}>
                         {this.props.columnNames.map((c, i) => <TableCell key={i}>{c}</TableCell>)}
                         </TableRow>
                     </TableHead>
@@ -52,4 +55,4 @@ class TableComponent extends Component{
     }
 }
 
-export default withStyles(TR)(TableComponent);
+export default withStyles(styles)(TableComponent);
