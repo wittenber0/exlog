@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const connection = mysql.createConnection({
   host: 'den1.mysql4.gear.host',
   user: 'mygeneric',
-  password: 'Ng92KAB4?4~5',
+  password: 'Rudish4091$',
   database: 'mygeneric'
 });
 module.exports.connect = () =>{
@@ -30,14 +30,13 @@ module.exports.getLiftWorkoutsById = (workoutId) =>{
   return new Promise((res, rej) => {
     connection.query(quer, (err, rows)=>{
         if(err) return rej(err);
-    
+
         res(JSON.parse(JSON.stringify(rows)));
     })
   })
-    
+
 }
 
 module.exports.getAllLiftWorkouts = () =>{
   return module.exports.getLiftWorkoutsById();
 }
-
